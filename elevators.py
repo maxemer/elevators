@@ -49,7 +49,7 @@ def printstats(l, lift_a, lift_b):
         cout = 'B steht'
     print(cout)
 
-
+#niceigkeit
 def visualize(l, lift_a, lift_b):
     i = len(l) - 1
     print('# # A # B # #')
@@ -90,12 +90,19 @@ def newrequest(i, l):
 lift_a = Lift()
 lift_b = Lift()
 requests = []
-levels = ['k', 'e', '1', '2', '3', '4']
+levels = ['K', 'E', '1', '2', '3', '4']
 
 visualize(levels, lift_a, lift_b)
 
 while True:
     cin = input('--> ')
     req = newrequest(cin, levels)
+    print(req)
     if len(req) > 0:
         requests.append(req)
+    if len(lift_a.getjobs()) <= len(lift_b.getjobs()):
+        lift_a.jobs.append(requests)
+    elif len(lift_b.getjobs()) <= len(lift_a.getjobs()):
+        lift_b.jobs.append(requests)
+    print(lift_a.getjobs())
+    print(lift_b.getjobs())
