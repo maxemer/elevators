@@ -15,10 +15,10 @@ class Lift(object):
         self.pos = pos
         self.way = way
     def move(self):
-        if self.way == 'r':
-            self.pos -= 1
         if self.way == 'h':
             self.pos += 1
+        if self.way == 'r':
+            self.pos -= 1
         if self.pos in self.jobs:
             self.jobs.remove(self.pos)
     def getjobs(self):
@@ -31,6 +31,25 @@ class Lift(object):
         if job not in self.jobs:
             self.jobs.append(job)
 
+def printstats(l, lift_a, lift_b):
+    cout = 'A faehrt '
+    if lift_a.getway() == 'h':
+        cout += 'hoch'
+    if lift_a.getway() == 'r':
+        cout += 'runter'
+    if lift_a.getway() == 's':
+        cout = 'A steht'
+    print(cout)
+    cout = 'A faehrt '
+    if lift_b.getway() == 'h':
+        cout += 'hoch'
+    if lift_b.getway() == 'r':
+        cout += 'runter'
+    if lift_b.getway() == 's':
+        cout = 'B steht'
+    print(cout)
+
+
 def visualize(l, lift_a, lift_b):
     i = len(l) - 1
     print('# # A # B # #')
@@ -40,20 +59,20 @@ def visualize(l, lift_a, lift_b):
         if lift_a.getpos() == i:
             if lift_a.getway() == 's':
                 cout += 'o'
-            if lift_a.getway() == 'r':
-                cout += 'V'
             if lift_a.getway() == 'h':
                 cout += '^'
+            if lift_a.getway() == 'r':
+                cout += 'V'
         else:
             cout += ' '
         cout += ' # '
         if lift_b.getpos() == i:
             if lift_b.getway() == 's':
                 cout += 'o'
-            if lift_b.getway() == 'r':
-                cout += 'V'
             if lift_b.getway() == 'h':
                 cout += '^'
+            if lift_b.getway() == 'r':
+                cout += 'V'
         else:
             cout += ' '
         cout += ' ' + l[i] + ' #'
