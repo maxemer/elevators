@@ -57,7 +57,6 @@ def printstats(l, lift_a, lift_b):
         cout = 'B steht'
     print(cout)
 
-#niceigkeit
 def visualize(l, lift_a, lift_b):
     i = len(l) - 1
     print('⌈ - A -- -- B - ⌉')
@@ -95,16 +94,10 @@ def newrequest(i, l):
         output = [l.index(floor), way]
     return output
 
-
-
 lift_a = Lift([])
 lift_b = Lift([])
 requests = []
-
 levels = ['K', 'E', '1', '2', '3', '4']
-# Liste für direction
-dir_a = []
-dir_b = []
 
 while True:
     req = []
@@ -117,24 +110,6 @@ while True:
         if len(lift_a.getjobs()) <= len(lift_b.getjobs()):
             lift_a.newjob(requests[0])
             requests.pop(0)
-            '''
-            newlist = lift_a.jobs[0]
-            print(newlist)
-
-            
-            if lift_a.pos < newlist[0]:
-                lift_a.setway("h")
-                lift_a.setpos("up")
-                print(lift_a.getpos())
-            elif lift_a.pos > newlist[0]:
-                lift_a.setway("r")
-            else:
-                lift_a.setway("s")
-            '''
-
-
-            #lift_a.getmove()
-
 
         else:
             lift_b.newjob(requests[0])
@@ -147,7 +122,7 @@ while True:
                 lift_b.setway("r")
             else:
                 lift_b.setway("s")
-           # lift_b.getmove()
+
     else:
         print("<return> gedrückt")
 
@@ -166,7 +141,7 @@ while True:
             lift_a.jobs.pop(0)
             cabine_input = input("Where to go(A): ")
             if cabine_input != "":
-                for i in cabine_input.split(','):
+                for i in cabine_input.split(' '):
                     tmp = []
                     tmp.append(levels.index(i))
                     lift_a.jobs.insert(0, tmp)
@@ -186,7 +161,7 @@ while True:
             lift_b.jobs.pop(0)
             cabine_input = input("Where to go(B): ")
             if cabine_input != "":
-                for i in cabine_input.split(','):
+                for i in cabine_input.split(' '):
                     tmp = []
                     tmp.append(levels.index(i))
                     lift_b.jobs.append(tmp)
@@ -197,8 +172,3 @@ while True:
     print("lift_a.jobs=",lift_a.jobs )
     print("lift_b.jobs=", lift_b.jobs)
 
-
-
-
-
-    
