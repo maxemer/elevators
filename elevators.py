@@ -30,6 +30,10 @@ class Lift(object):
     def newjob(self, job):
         if job not in self.jobs:
             self.jobs.append(job)
+    def setway(self, w):
+        self.way = w
+    def setpos(self, p):
+        self.pos = p
 
 def printstats(l, lift_a, lift_b):
     cout = 'A faehrt '
@@ -39,46 +43,50 @@ def printstats(l, lift_a, lift_b):
         cout += 'runter'
     if lift_a.getway() == 's':
         cout = 'A steht'
+    if lift_a.getway() == 'o':
+        cout = 'A ist offen'
     print(cout)
-    cout = 'A faehrt '
+    cout = 'B faehrt '
     if lift_b.getway() == 'h':
         cout += 'hoch'
     if lift_b.getway() == 'r':
         cout += 'runter'
     if lift_b.getway() == 's':
         cout = 'B steht'
+    if lift_b.getway() == 'o':
+        cout = 'B ist offen'
     print(cout)
 
 #niceigkeit
 def visualize(l, lift_a, lift_b):
     i = len(l) - 1
-    print('# # A # B # #')
+    print('⌈ - A -- -- B - ⌉')
     while i >= 0:
-        cout = '# '
+        cout = '⏐ '
         cout += l[i] + ' '
         if lift_a.getpos() == i:
             if lift_a.getway() == 's':
-                cout += 'o'
+                cout += '[ ]'
             if lift_a.getway() == 'h':
-                cout += '^'
+                cout += '/\ '
             if lift_a.getway() == 'r':
-                cout += 'V'
+                cout += '\/ '
         else:
-            cout += ' '
-        cout += ' # '
+            cout += '   '
+        cout += ' | '
         if lift_b.getpos() == i:
             if lift_b.getway() == 's':
-                cout += 'o'
+                cout += '[ ]'
             if lift_b.getway() == 'h':
-                cout += '^'
+                cout += '/\ '
             if lift_b.getway() == 'r':
-                cout += 'V'
+                cout += '\/ '
         else:
-            cout += ' '
-        cout += ' ' + l[i] + ' #'
+            cout += '   '
+        cout += ' ' + l[i] + ' ⏐'
         print(cout)
         i -= 1
-    print('# # A # B # #')
+    print('⌊ - A -- -- B - ⌋')
 
 def newrequest(i, l):
     output = []
@@ -87,22 +95,28 @@ def newrequest(i, l):
         output = [l.index(floor), way]
     return output
 
+
+
 lift_a = Lift()
 lift_b = Lift()
 requests = []
 levels = ['K', 'E', '1', '2', '3', '4']
-
-visualize(levels, lift_a, lift_b)
+# Liste für direction
+dir_a = []
+dir_b = []
 
 while True:
+    visualize(levels, lift_a, lift_b)
     cin = input('--> ')
     req = newrequest(cin, levels)
-    print(req)
+    print(newrequest(cin, levels))
+    if cin == "":
+        # befehl rein damit Tick eins weiter läuft also ohne irgendwas zu machen
+        continue
     if len(req) > 0:
         requests.append(req)
     if len(lift_a.getjobs()) <= len(lift_b.getjobs()):
         lift_a.jobs.append(requests)
-    elif len(lift_b.getjobs()) <= len(lift_a.getjobs()):
+    else:
         lift_b.jobs.append(requests)
-    print(lift_a.getjobs())
-    print(lift_b.getjobs())
+
