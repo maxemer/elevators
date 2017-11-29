@@ -2,7 +2,8 @@
 Two-Elevator-Simulation
 from EPR-Job No.4
 """
-#import nothing
+import random
+# import nothing
 __author__ = "6598273: Markus Kalusche, 6768647: Tobias Denzer"  # your data
 __copyright__ = "Copyright 2017/2018 – Tobias Denzer & Markus Kalusche \
                 @ EPR-Goethe-Uni"
@@ -86,7 +87,9 @@ def visualize(l, lift_a, lift_b):
         print(cout)
         i -= 1
     print('⌊ - A -- -- B - ⌋')
-
+def randtick():
+    x = random.randint(1, 3)
+    return x
 def newrequest(i, l):
     output = []
     if len(i) == 2:
@@ -101,6 +104,7 @@ levels = ['K', 'E', '1', '2', '3', '4']
 
 
 while True:
+
     req = []
     visualize(levels, lift_a, lift_b)
     cin = input('--> ')
@@ -129,13 +133,14 @@ while True:
 
     if len(lift_a.getjobs()) > 0:
         newlist_a = lift_a.jobs[0]
+
         lift_a.setway("s")
         visualize(levels, lift_a, lift_b)
         print(newlist_a)
         if lift_a.pos < newlist_a[0]:
             lift_a.setway("h")
             lift_a.setpos("up")
-            print(lift_a.getpos())
+            print("lift_a.getpos= ", lift_a.getpos())
         elif lift_a.pos > newlist_a[0]:
             lift_a.setway("r")
             lift_a.setpos("down")
@@ -143,7 +148,6 @@ while True:
             lift_a.setway("s")
             lift_a.jobs.pop(0)
             cabine_input = input("Where to go(A): ")
-
             if "A" in cabine_input:
                 cabine_input = cabine_input.replace("A", "")
             if "B" in cabine_input:
@@ -154,14 +158,17 @@ while True:
                     tmp.append(levels.index(i))
                     lift_a.jobs.insert(0, tmp)
                     print("TEMP=", tmp)
-                # continue
+
 
     if len(lift_b.getjobs()) > 0:
         newlist_b = lift_b.jobs[0]
+        lift_b.setway("s")
+        visualize(levels, lift_a, lift_b)
         print(newlist_b)
         if lift_b.pos < newlist_b[0]:
             lift_b.setway("h")
             lift_b.setpos("up")
+            print("lift_b.getpos= ", lift_b.getpos())
         elif lift_b.pos > newlist_b[0]:
             lift_b.setway("r")
             lift_b.setpos("down")
@@ -169,6 +176,10 @@ while True:
             lift_b.setway("s")
             lift_b.jobs.pop(0)
             cabine_input = input("Where to go(B): ")
+            if "A" in cabine_input:
+                cabine_input = cabine_input.replace("A", "")
+            if "B" in cabine_input:
+                cabine_input = cabine_input.replace("B", "")
             if cabine_input != "":
                 for i in cabine_input.split(' '):
                     tmp = []
