@@ -99,6 +99,7 @@ lift_b = Lift([])
 requests = []
 levels = ['K', 'E', '1', '2', '3', '4']
 
+
 while True:
     req = []
     visualize(levels, lift_a, lift_b)
@@ -106,7 +107,7 @@ while True:
     req = newrequest(cin, levels)
     if len(req) > 0:
         requests.append(req)
-        print("success")
+        #print("success")
         if len(lift_a.getjobs()) <= len(lift_b.getjobs()):
             lift_a.newjob(requests[0])
             requests.pop(0)
@@ -128,6 +129,8 @@ while True:
 
     if len(lift_a.getjobs()) > 0:
         newlist_a = lift_a.jobs[0]
+        lift_a.setway("s")
+        visualize(levels, lift_a, lift_b)
         print(newlist_a)
         if lift_a.pos < newlist_a[0]:
             lift_a.setway("h")
@@ -140,12 +143,18 @@ while True:
             lift_a.setway("s")
             lift_a.jobs.pop(0)
             cabine_input = input("Where to go(A): ")
+
+            if "A" in cabine_input:
+                cabine_input = cabine_input.replace("A", "")
+            if "B" in cabine_input:
+                cabine_input = cabine_input.replace("B", "")
             if cabine_input != "":
                 for i in cabine_input.split(' '):
                     tmp = []
                     tmp.append(levels.index(i))
                     lift_a.jobs.insert(0, tmp)
                     print("TEMP=", tmp)
+                # continue
 
     if len(lift_b.getjobs()) > 0:
         newlist_b = lift_b.jobs[0]
