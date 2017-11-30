@@ -1,5 +1,5 @@
 """
-Userinterface for Two-Elevator-Simulation
+User-interface for Two-Elevator-Simulation
 from EPR-Job No.4
 """
 #import nothing
