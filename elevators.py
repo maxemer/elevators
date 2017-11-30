@@ -2,7 +2,7 @@
 Two-Elevator-Simulation
 from EPR-Job No.4
 """
-#import nothing
+from userinterface import visualize
 __author__ = "6598273: Markus Kalusche, 6768647: Tobias Denzer"  # your data
 __copyright__ = "Copyright 2017/2018 – Tobias Denzer & Markus Kalusche \
                 @ EPR-Goethe-Uni"
@@ -56,37 +56,6 @@ def printstats(l, lift_a, lift_b):
     if lift_b.getway() == 's':
         cout = 'B steht'
     print(cout)
-
-#niceigkeit
-def visualize(l, lift_a, lift_b):
-    i = len(l) - 1
-    print('⌈ - A -- -- B - ⌉')
-    while i >= 0:
-        cout = '⏐ '
-        cout += l[i] + ' '
-        if lift_a.getpos() == i:
-            if lift_a.getway() == 's':
-                cout += '[ ]'
-            if lift_a.getway() == 'h':
-                cout += '/\ '
-            if lift_a.getway() == 'r':
-                cout += '\/ '
-        else:
-            cout += '   '
-        cout += ' | '
-        if lift_b.getpos() == i:
-            if lift_b.getway() == 's':
-                cout += '[ ]'
-            if lift_b.getway() == 'h':
-                cout += '/\ '
-            if lift_b.getway() == 'r':
-                cout += '\/ '
-        else:
-            cout += '   '
-        cout += ' ' + l[i] + ' ⏐'
-        print(cout)
-        i -= 1
-    print('⌊ - A -- -- B - ⌋')
 
 def newrequest(i, l):
     output = []
