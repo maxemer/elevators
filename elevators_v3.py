@@ -3,6 +3,7 @@ Two-Elevator-Simulation
 from EPR-Job No.4
 """
 from userinterface import visualize
+import random
 __author__ = "6598273: Markus Kalusche, 6768647: Tobias Denzer"  # your data
 __copyright__ = "Copyright 2017/2018 – Tobias Denzer & Markus Kalusche \
                 @ EPR-Goethe-Uni"
@@ -10,13 +11,18 @@ __credits__ = "nobody"
 __email__ = "s1539940@stud.uni-frankfurt.de"
 
 class Lift():
-    def __init__(self, jobs = [], pos = 0, way = 's'):
+    """Class Lift"""
+    def __init__(self, jobs = [], pos = 0, tick = 0, way = 's'):
+        """Constructor"""
         self.jobs = jobs
         self.pos = pos
+        self.tick = tick
         self.way = way
     def countjobs(self):
+        """Returns an Integer of the Amount of Jobs"""
         return len(self.jobs)
     def move(self, way):
+        """Move the Lift one Tick"""
         if way == 'up':
             self.pos += 1
         if way == 'down':
@@ -24,24 +30,35 @@ class Lift():
         """if self.pos in self.jobs:
             self.jobs.remove(self.pos)"""
         if len(self.jobs) == 0:
-            self.status = 's'
+            self.way = 's'
     def getpos(self):
+        """Returns an Integer of the Position"""
         return self.pos
     def getway(self):
+        """Returns the Way of the Lift (s/h/r)"""
         return self.way
     def insertjob(self, job):
+        """Inserts a new Job to the first Position of the Job-List"""
         if job not in self.jobs:
             self.jobs.insert(0, job)
     def newjob(self, job):
+        """Inserts a new Job to the last Position of the Job-List"""
         if job not in self.jobs:
             self.jobs.append(job)
     def setway(self, way):
+        """Set the new Way of the Lift (s/h/r)"""
         self.way = way
 
 def floor_to_index(f, l):
-    return l.index(f)
+    """Returns the Index as an Integer"""
+    if f in l:
+        return l.index(f)
+    else:
+        print(f, 'is not a valid floor! statement skipped.')
+        return False
 
 def index_to_floor(i, l):
+    """Returns the Floor as a String"""
     return l[int(i)]
 
 lift_a = Lift([])
@@ -70,7 +87,14 @@ while True:
                 elif i.find('b') == 0:
                     lift_b.newjob(floor_to_index(i.replace('b', ''), levels))
                 elif i.find('h') == 1 or i.find('r') == 1:
-                    requests.append([floor_to_index(i[0], levels), i[1]])
+                    new_req = [floor_to_index(i[0], levels), i[1]]
+                    if new_req[0] == 0 and new_req[1] == 'r' \
+                        or new_req[0] + 1 == len(levels) and new_req[1] == 'h':
+                            print(i, 'skipped. these buttons do not exist \
+                            in that floor!')
+                    else:
+                        if new_req not in requests:
+                            requests.append(new_req)
                 else:
                     print(i, 'skipped. please only a,A,b,B,h,H,r,R !')
             else:
@@ -126,7 +150,7 @@ while True:
             requests.pop(0)
         else:
             if lift_b.countjobs() < 1:
-                lift_a.newjob(requests[0][0])
+                lift_b.newjob(requests[0][0])
                 requests.pop(0)
 
     #moving lift a

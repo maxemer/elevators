@@ -10,6 +10,7 @@ __credits__ = "nobody"
 __email__ = "s1539940@stud.uni-frankfurt.de"
 
 def visualize(l, lift_a, lift_b):
+    """Print out the Visualization the the Console"""
     i = len(l) - 1
     print('⌈ - A -- -- B - ⌉')
     while i >= 0:

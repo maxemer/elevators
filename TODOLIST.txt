@@ -1,3 +1,13 @@
+~ ~ ~ ~ ~ ~
+~ To-Do's ~
+~ ~ ~ ~ ~ ~
+
+## v3 # #
+- Random Ticks bei "Standby"
+- evtl. Ausgabe von Aufträgen der Lifts und der Stockwärke verschönern?!
+- Nachkommentieren!!!
+
+## old ##
 - "A4" splitten -> 4
 - comment
 - Pole Tänzerinnen 
