@@ -4,7 +4,7 @@
 
 ## v3 # #
 - Random Ticks bei "Standby"
-- evtl. Ausgabe von Aufträgen der Lifts und der Stockwärke verschönern?!
+- evtl. Ausgabe von Aufträgen der Lifts und der Stockwerke verschönern?!
 - Nachkommentieren!!!
 
 ## old ##
