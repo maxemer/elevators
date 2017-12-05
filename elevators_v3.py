@@ -2,7 +2,7 @@
 Two-Elevator-Simulation
 from EPR-Job No.4
 """
-from userinterface import visualize
+from userinterface import printjobs, visualize
 import random
 __author__ = "6598273: Markus Kalusche, 6768647: Tobias Denzer"  # your data
 __copyright__ = "Copyright 2017/2018 – Tobias Denzer & Markus Kalusche \
@@ -21,6 +21,9 @@ class Lift():
     def countjobs(self):
         """Returns an Integer of the Amount of Jobs"""
         return len(self.jobs)
+    def getjobs(self):
+        """Returns the Job-List"""
+        return self.jobs
     def getpos(self):
         """Returns an Integer of the Position"""
         return self.pos
@@ -65,26 +68,24 @@ def floor_to_index(f, l):
         print(f, 'is not a valid floor! statement skipped.')
         return False
 
-def index_to_floor(i, l):
-    """Returns the Floor as a String"""
-    return l[int(i)]
-
 def main():
+    """Main-Program"""
     lift_a = Lift([])
     lift_b = Lift([])
     requests = []
     levels = ['k', 'e', '1', '2', '3', '4']
 
     while True:
-        print('Tick Lift A:', lift_a.gettick())
+        """print('Tick Lift A:', lift_a.gettick())
         print('Tick Lift B:', lift_b.gettick())
         print('Requests:', requests)
         print('Jobs Lift A:', lift_a.jobs)
-        print('Jobs Lift B:', lift_b.jobs)
+        print('Jobs Lift B:', lift_b.jobs)"""
+
+        printjobs(levels, requests, lift_a.getjobs(), lift_b.getjobs())
         visualize(levels, lift_a, lift_b)
 
         cin = input('--> ')
-        inp = []
         inp = cin.split(' ')
 
         #statement handler
